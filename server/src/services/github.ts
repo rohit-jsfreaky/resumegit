@@ -9,7 +9,7 @@ import {
 
 export class GitHubService {
   private baseUrl = 'https://api.github.com';
-  private headers: HeadersInit;
+  private headers: Record<string, string>;
 
   constructor(token?: string) {
     this.headers = {
@@ -34,7 +34,7 @@ export class GitHubService {
       throw new Error(`GitHub API error: ${response.status}`);
     }
 
-    return response.json();
+    return response.json() as Promise<T>;
   }
 
   async getUserData(username: string): Promise<GitHubData> {
